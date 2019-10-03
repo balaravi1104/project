@@ -23,7 +23,7 @@ export class QuizComponent implements OnInit {
     'pageSize': 1,
     'requiredAll': false,  // indicates if you must answer all the questions before submitting.
     'richText': false,
-    'shuffleQuestions': true,
+    'shuffleQuestions': false,
     'shuffleOptions': false,
     'showClock': false,
     'showPager': true,
