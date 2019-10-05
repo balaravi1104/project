@@ -19,7 +19,7 @@ export class QuizComponent implements OnInit {
     'allowBack': true,
     'allowReview': true,
     'autoMove': false,  // if true, it will move to next question automatically when answered.
-    'duration': 300,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
+    'duration': 60,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
     'pageSize': 1,
     'requiredAll': false,  // indicates if you must answer all the questions before submitting.
     'richText': false,
@@ -113,7 +113,14 @@ export class QuizComponent implements OnInit {
     this.quiz.questions.forEach(x => answers.push({ 'quizId': this.quiz.id, 'questionId': x.id, 'answered': x.answered }));
 
     // Post your data to the server here. answers contains the questionId and the users' answer.
-    console.log(this.quiz.questions);
+    //console.log(this.quiz.questions);
     this.mode = 'result';
+  }
+  nextquiz() {
+    // if(){
+    this.quizName = this.quizes[1].id;
+    this.loadQuiz(this.quizName);
+    this.mode = 'quiz';
+    // }
   }
 }

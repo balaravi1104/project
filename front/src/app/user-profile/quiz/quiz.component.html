@@ -8,6 +8,7 @@
   </div>
 </div>
 <div id="quiz">
+  <!-- {{quizes[1].id}} -->
   <h2 class="text-center font-weight-normal">{{quiz.name}}</h2>
   <hr />
 
@@ -34,7 +35,7 @@
       <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
       <button class="btn btn-primary" (click)="goTo(pager.index + 1);">Next</button>
       <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.count - 1);">Last</button>
-      
+
     </div>
   </div>
 
@@ -56,6 +57,10 @@
         <div class="p-1 m-2 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
       </div>
     </div>
+    <div style="text-align: center;">
+   <button class="btn btn-dark" (click)="nextquiz();">next quiz</button>
+   <br>
+  </div>
     <h4 class="alert alert-info text-center">You may close this window now.</h4>
   </div>
   <hr />
