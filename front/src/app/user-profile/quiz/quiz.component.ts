@@ -8,32 +8,35 @@ import { Option, Question, Quiz, QuizConfig } from '../models/index';
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.css'],
-  providers: [QuizService,HelperService]
+  providers: [QuizService, HelperService],
 })
 export class QuizComponent implements OnInit {
+  result: boolean;
+  score: number = 0;
   quizes: any[];
   quiz: Quiz = new Quiz(null);
   mode = 'quiz';
   quizName: string;
+
   config: QuizConfig = {
-    'allowBack': true,
-    'allowReview': true,
-    'autoMove': false,  // if true, it will move to next question automatically when answered.
-    'duration': 60,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
-    'pageSize': 1,
-    'requiredAll': false,  // indicates if you must answer all the questions before submitting.
-    'richText': false,
-    'shuffleQuestions': false,
-    'shuffleOptions': false,
-    'showClock': false,
-    'showPager': true,
-    'theme': 'none'
+    allowBack: true,
+    allowReview: true,
+    autoMove: false, // if true, it will move to next question automatically when answered.
+    duration: 120, // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
+    pageSize: 1,
+    requiredAll: false, // indicates if you must answer all the questions before submitting.
+    richText: false,
+    shuffleQuestions: false,
+    shuffleOptions: false,
+    showClock: false,
+    showPager: true,
+    theme: 'none',
   };
 
   pager = {
     index: 0,
     size: 1,
-    count: 1
+    count: 1,
   };
   timer: any = null;
   startTime: Date;
@@ -41,7 +44,7 @@ export class QuizComponent implements OnInit {
   ellapsedTime = '00:00';
   duration = '';
 
-  constructor(private quizService: QuizService) { }
+  constructor(private quizService: QuizService) {}
 
   ngOnInit() {
     this.quizes = this.quizService.getAll();
@@ -55,7 +58,10 @@ export class QuizComponent implements OnInit {
       this.pager.count = this.quiz.questions.length;
       this.startTime = new Date();
       this.ellapsedTime = '00:00';
-      this.timer = setInterval(() => { this.tick(); }, 1000);
+      this.score = 0;
+      this.timer = setInterval(() => {
+        this.tick();
+      }, 1000);
       this.duration = this.parseTime(this.config.duration);
     });
     this.mode = 'quiz';
@@ -79,13 +85,14 @@ export class QuizComponent implements OnInit {
   }
 
   get filteredQuestions() {
-    return (this.quiz.questions) ?
-      this.quiz.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
+    return this.quiz.questions ? this.quiz.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
   }
 
   onSelect(question: Question, option: Option) {
     if (question.questionTypeId === 1) {
-      question.options.forEach((x) => { if (x.id !== option.id) x.selected = false; });
+      question.options.forEach(x => {
+        if (x.id !== option.id) x.selected = false;
+      });
     }
 
     if (this.config.autoMove) {
@@ -102,25 +109,56 @@ export class QuizComponent implements OnInit {
 
   isAnswered(question: Question) {
     return question.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
-  };
+  }
 
   isCorrect(question: Question) {
-    return question.options.every(x => x.selected === x.isAnswer) ? 'correct' : 'wrong';
-  };
+    this.result = question.options.every(x => x.selected === x.isAnswer) ? true : false;
+
+    console.log(this.result);
+    // if (this.result == true){
+    //   console.log(this.result);
+    //   console.log(this.score);
+    //   this.score++;
+    //   console.log(this.score);
+
+    // }
+
+    return this.result;
+  }
 
   onSubmit() {
     let answers = [];
-    this.quiz.questions.forEach(x => answers.push({ 'quizId': this.quiz.id, 'questionId': x.id, 'answered': x.answered }));
+    this.quiz.questions.forEach(x => answers.push({ quizId: this.quiz.id, questionId: x.id, answered: x.answered }));
 
     // Post your data to the server here. answers contains the questionId and the users' answer.
     //console.log(this.quiz.questions);
     this.mode = 'result';
   }
+  getScore(question: Question) {
+    this.result = question.options.every(x => x.selected === x.isAnswer) ? true : false;
+    if (this.result == true) {
+      console.log(this.result);
+      console.log(this.score);
+      this.score++;
+      console.log(this.score);
+    }
+    return this.score;
+  }
   nextquiz() {
-    // if(){
-    this.quizName = this.quizes[1].id;
-    this.loadQuiz(this.quizName);
-    this.mode = 'quiz';
-    // }
+    // console.log(this.quizName);
+    // console.log(this.quizes[0].id);
+    // console.log(this.quizes[1].id);
+    // tslint:disable-next-line:no-conditional-assignment
+    if (this.quizName == this.quizes[0].id) {
+      this.quizName = this.quizes[1].id;
+      this.loadQuiz(this.quizName);
+      this.mode = 'quiz';
+      //console.log("if")
+    } else {
+      this.quizName = this.quizes[0].id;
+      this.loadQuiz(this.quizName);
+      this.mode = 'quiz';
+      //console.log("else");
+    }
   }
 }

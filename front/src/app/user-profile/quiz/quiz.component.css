@@ -1,11 +1,19 @@
 @import '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../../../../node_modules/bootstrap/dist/css/bootstrap.css';
 
-.btn{
+.btn {
   border-radius: 0;
 }
+.inventory-body {
+  position: fixed;
+  min-width: 100%;
+  background-image: url("../../../assets/img/bgquiz.jpg");
+  background-repeat: no-repeat;
+  background-position:right;
+  background-size: 20% 50%;
 
-.option{
+  }
+.option {
   background-color:#cadaee;
   font-size:20px;
   padding:10px;
@@ -16,11 +24,11 @@
       width:22px;
   }
 
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
 }
 
-.result-question{
+.result-question {
   background-color:#eee;
   margin:4px;
   padding:6px;
