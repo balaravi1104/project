@@ -16,11 +16,31 @@ const QuestionSchema = new Schema({
         id: Number,
         name: String,
         isAnswer: Boolean
+      },
+      {
+        id: Number,
+        name: String,
+        isAnswer: Boolean
+      },
+      {
+        id: Number,
+        name: String,
+        isAnswer: Boolean
       }
-    ]
+      
+    ],
+    questionType : [
+       {
+      id : Number,
+      name : String,
+      isActive : Boolean
+  }
+]
       }
     ]
     
 })
+
+
 module.exports=mongoose.model('Quiz',QuestionSchema);
  

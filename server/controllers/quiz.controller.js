@@ -1,15 +1,19 @@
 const mongoose = require('mongoose')
 const _ = require('lodash')
 
-const quiz = mongoose.model('Quiz')
+const quiz = require('../models/quiz.model');
+// const quiz = require('../models/quiz.model');
 
-module.exports.getquiz = (req, res, next) => {
-  quiz.find({ id: req.id }, function (err, items) {
+module.exports.getquiz = (req, res) => {
+    
+  quiz.find({ }, function (err, Quiz) {
+      console.log(Quiz);
     if (err) {
       console.log(err)
       res.json({ err: err })
     } else {
-      res.json({ status: true, user: _.pick(id, ['name', 'questions', 'options']) })
+      res.send(Quiz);
     }
+    
   })
 }

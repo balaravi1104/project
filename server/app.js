@@ -8,7 +8,7 @@ const cors = require('cors');
 const passport = require('passport');
 
 const rtsIndex = require('./routes/index.router');
-
+const quiz = require('./routes/quiz.route');
 var app = express();
 
 // middleware
@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize());
 app.use('/api', rtsIndex);
+app.use('/api/quiz',quiz);
 
 // error handler
 app.use((err, req, res, next) => {
