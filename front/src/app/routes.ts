@@ -8,27 +8,34 @@ import { QuizComponent } from './user-profile/quiz/quiz.component';
 import { ResultComponent } from './user-profile/result/result.component';
 
 export const appRoutes: Routes = [
-    {
-        path: 'signup', component: UserComponent,
-        children: [{ path: '', component: SignUpComponent }]
-    },
-    {
-        path: 'login', component: UserComponent,
-        children: [{ path: '', component: SignInComponent }]
-    },
-    {
-        path: 'userprofile', component: UserProfileComponent,canActivate:[AuthGuard]
-    },
-    {
-        path: '', redirectTo: '/login', pathMatch: 'full'
-    },
-    {
-      path: 'quiz', component: QuizComponent,canActivate:[AuthGuard]
-
+  {
+    path: 'signup',
+    component: UserComponent,
+    children: [{ path: '', component: SignUpComponent }],
   },
   {
-    path: 'result', component: ResultComponent,canActivate:[AuthGuard]
-
-}
-
+    path: 'login',
+    component: UserComponent,
+    children: [{ path: '', component: SignInComponent }],
+  },
+  {
+    path: 'userprofile',
+    component: UserProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'quiz',
+    component: QuizComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'result',
+    component: ResultComponent,
+    canActivate: [AuthGuard],
+  },
 ];

@@ -10,9 +10,12 @@
   </div>
   <div id="quiz">
     <!-- {{quizes[1].id}} -->
+
     <h2 class="text-center font-weight-normal">{{quiz.name}}</h2>
     <hr />
-
+    <div id="progressbar">
+      <div [style.width.%]="(pager.index + 1)*10"></div>
+  </div>
     <div *ngIf="mode=='quiz' && quiz">
       <div *ngFor="let question of filteredQuestions;">
         <div class="badge badge-info">Question {{pager.index + 1}} of {{pager.count}}.</div>
@@ -59,17 +62,19 @@
             </div>
           </div>
           <!-- <div class="p-1 m-2 alert {{ isCorrect(question) == 'correct' ? 'alert-success': 'alert-danger'}}"> -->
+            <!-- <div ng-class="isCorrect(question) ? 'alert-success' :'alert-danger'"> -->
             <div [ngClass]="{
               'alert-success':  isCorrect(question) == true,
               'alert-danger':  isCorrect(question) == false
           }">
             Your answer is {{this.result}}.</div>
         </div>
-
       </div>
+
       <div style="text-align: center;">
         <br>
-        <button class="btn btn-dark" (click)="nextquiz();">next quiz</button>
+
+    <button class="btn btn-dark" (click)="nextquiz();">next quiz</button>
         <br>
       </div>
       <h4 class="alert alert-info text-center">You may close this window now.</h4>

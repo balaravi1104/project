@@ -47,6 +47,7 @@ export class QuizComponent implements OnInit {
   constructor(private quizService: QuizService) {}
 
   ngOnInit() {
+
     this.quizes = this.quizService.getAll();
     this.quizName = this.quizes[0].id;
     this.loadQuiz(this.quizName);
@@ -91,7 +92,7 @@ export class QuizComponent implements OnInit {
   onSelect(question: Question, option: Option) {
     if (question.questionTypeId === 1) {
       question.options.forEach(x => {
-        if (x.id !== option.id) x.selected = false;
+        if( x.id !== option.id ) { x.selected = false; }
       });
     }
 
@@ -131,19 +132,19 @@ export class QuizComponent implements OnInit {
     this.quiz.questions.forEach(x => answers.push({ quizId: this.quiz.id, questionId: x.id, answered: x.answered }));
 
     // Post your data to the server here. answers contains the questionId and the users' answer.
-    //console.log(this.quiz.questions);
+    // console.log(this.quiz.questions);
     this.mode = 'result';
   }
-  getScore(question: Question) {
-    this.result = question.options.every(x => x.selected === x.isAnswer) ? true : false;
-    if (this.result == true) {
-      console.log(this.result);
-      console.log(this.score);
-      this.score++;
-      console.log(this.score);
-    }
-    return this.score;
-  }
+  // getScore(question: Question) {
+  //   this.result = question.options.every(x => x.selected === x.isAnswer) ? true : false;
+  //   if (this.result == true) {
+  //     console.log(this.result);
+  //     console.log(this.score);
+  //     this.score++;
+  //     console.log(this.score);
+  //   }
+  //   return this.score;
+  // }
   nextquiz() {
     // console.log(this.quizName);
     // console.log(this.quizes[0].id);
@@ -153,12 +154,12 @@ export class QuizComponent implements OnInit {
       this.quizName = this.quizes[1].id;
       this.loadQuiz(this.quizName);
       this.mode = 'quiz';
-      //console.log("if")
+      // console.log("if")
     } else {
       this.quizName = this.quizes[0].id;
       this.loadQuiz(this.quizName);
       this.mode = 'quiz';
-      //console.log("else");
+      // console.log("else");
     }
   }
 }

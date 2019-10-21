@@ -9,8 +9,10 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  height: 100vh;
+  height: 99vh;
   overflow-x: hidden;
+  overflow-y: auto;
+
 }
 
 a {
@@ -52,6 +54,7 @@ h2 {
   background-color:#eee;
   margin:4px;
   padding:6px;
+
 }
 
 @media only screen and (max-width: 480px) {

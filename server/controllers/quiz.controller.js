@@ -7,12 +7,12 @@ const quiz = require('../models/quiz.model');
 module.exports.getquiz = (req, res) => {
     
   quiz.find({ }, function (err, Quiz) {
-      console.log(Quiz);
+      console.log("inside quiz")
     if (err) {
       console.log(err)
       res.json({ err: err })
     } else {
-      res.send(Quiz);
+      res.json(Quiz.id);
     }
     
   })
