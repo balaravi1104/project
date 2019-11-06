@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { UserService } from '../../shared/user.service'
-import { appRoutes } from 'src/app/routes';
+import { appRoutes } from '../../app-routing.module';
 import { Routes , Router} from '@angular/router';
 
 @Component({

@@ -19,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 headers: req.headers.set("Authorization", "Bearer " + this.userService.getToken())
             });
             return next.handle(clonedreq).pipe(
-                tap(
+                tap( // RxJS pipeable operator that returns identical Observable as source Observable
                     event => { },
                     err => {
                         if (err.error.auth == false) {

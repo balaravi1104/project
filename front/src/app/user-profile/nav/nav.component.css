@@ -12,6 +12,9 @@ a {
   padding: 14px 16px;
   float: left;
 }
+a:first-letter {
+  text-transform:capitalize;
+}
 li {
   float: right;
 }

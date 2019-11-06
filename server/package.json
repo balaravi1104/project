@@ -1,21 +1,21 @@
 {
-  "name": "project",
+  "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "server side",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "bala",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
-    "cors": "^2.8.4",
-    "express": "^4.16.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.15",
-    "mongoose": "^5.7.1",
+    "mongoose": "^5.7.6",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
   }

@@ -2,7 +2,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 // components
 import { AppComponent } from './app.component';
@@ -12,7 +11,7 @@ import { QuizComponent } from './user-profile/quiz/quiz.component';
 import { ResultComponent } from './user-profile/result/result.component';
 import { NavComponent } from './user-profile/nav/nav.component';
 //routes
-import { appRoutes } from './routes';
+import { AppRoutingModule } from './app-routing.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { UserService } from './shared/user.service';
@@ -35,7 +34,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
+   AppRoutingModule,
     HttpClientModule
   ],
   providers: [{

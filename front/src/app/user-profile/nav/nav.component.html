@@ -1,18 +1,13 @@
-<nav >
-  <div >
-    <ul >
-        <a href="#">Quiz</a>
-        <li>
-          <a  (click)="logOut()">Logout</a>
-        </li>
+<nav>
+  <div>
+    <ul>
+      <a routerLink="/userprofile">hi, &nbsp;{{userDetails.fullName.split(' ')[0]}} </a>
       <li>
-        <a  routerLink="/quiz" > Quiz </a>
+        <a (click)="logOut()">Logout</a>
       </li>
       <li>
-        <a  routerLink="/userprofile"> Home </a>
+        <a routerLink="/quiz"> Quiz </a>
       </li>
-
     </ul>
   </div>
 </nav>
-
