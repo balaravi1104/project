@@ -12,20 +12,12 @@ import { Option, Question, Quiz, QuizConfig } from '../models/index';
 })
 export class QuizComponent implements OnInit {
   quizes: any[];
-  quiz: Quiz = new Quiz(null);
+  data: any;
+  //quiz: Quiz = new Quiz(null);
+  quiz:Quiz;
   mode = 'quiz';
   quizName: string;
-  config: QuizConfig = {
-    allowBack: true,
-    allowReview: true,
-    autoMove: false, // if true, it will move to next question automatically when answered.
-    duration: 120, // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
-    pageSize: 1,
-    requiredAll: false, // indicates if you must answer all the questions before submitting.
-
-    showClock: false,
-    showPager: true,
-  };
+  config: QuizConfig = new QuizConfig();
 
   pager = {
     index: 0,
@@ -40,24 +32,52 @@ export class QuizComponent implements OnInit {
 
   constructor(private quizService: QuizService) {}
 
-  ngOnInit() {
-    this.quizes = this.quizService.getAll();
-    this.quizName = this.quizes[0].id;
-    this.loadQuiz(this.quizName);
-  }
+   ngOnInit() { this.loadQuiz();}
+  //   // this.quizes = this.quizService.getAll();
+  //   // this.quizName = this.quizes[0].id;
+  //   //this.loadQuiz();
+  //   // this.quizService.getquiz().subscribe(res => {
 
-  loadQuiz(quizName: string) {
-    this.quizService.get(quizName).subscribe(res => {
-      this.quiz = new Quiz(res);
-      this.pager.count = this.quiz.questions.length;
-      this.startTime = new Date();
-      this.ellapsedTime = '00:00';
-      this.timer = setInterval(() => {
-        this.tick();
-      }, 1000);
-      this.duration = this.parseTime(this.config.duration);
-    });
+  //   //   this.data = [res];
+  //   // console.log(this.data[0])
+  //   // this.quiz = new Quiz(this.data[0])
+  //   // },
+  //   //   err => {
+  //   //     console.log(err);
+  //   //   }
+  //   // );
+  // }
+
+  loadQuiz() {
+    this.quizService.getquiz().subscribe(
+      res => {
+        this.data = res;
+        console.log(this.data);
+        console.log(this.data);
+        this.quiz = new Quiz(this.data);
+        console.log('hi');
+        this.pager.count = this.quiz.questions.length;
+        this.startTime = new Date();
+        this.ellapsedTime = '00:00';
+        this.timer = setInterval(() => {
+          this.tick();
+        }, 1000);
+        this.duration = this.parseTime(this.config.duration);
+      },
+      err => {
+        console.log(err);
+      }
+        // this.quizService.getquiz().subscribe(res => {
+        //   this.quiz = new Quiz(res);
+
+
+        );
+    // console.log(this.quiz.id);
     this.mode = 'quiz';
+    // this.quizService.getquiz().subscribe(res => {
+    //   this.quiz = new Quiz(res)
+    //   console.log(this.quiz.id)
+    // })
   }
 
   tick() {
@@ -121,7 +141,7 @@ export class QuizComponent implements OnInit {
   nextquiz() {
     // if(){
     this.quizName = this.quizes[1].id;
-    this.loadQuiz(this.quizName);
+    // this.loadQuiz();
     this.mode = 'quiz';
     this.pager.index = 0;
     // }

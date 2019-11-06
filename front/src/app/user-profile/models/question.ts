@@ -10,8 +10,8 @@ export class Question {
     constructor(data: any) {
         data = data || {};
         this.id = data.id;
+        console.log("question")
         this.name = data.name;
-        this.questionTypeId = data.questionTypeId;
         this.options = [];
         data.options.forEach(o => {
             this.options.push(new Option(o));

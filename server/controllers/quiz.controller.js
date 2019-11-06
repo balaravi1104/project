@@ -16,7 +16,7 @@ const Quiz = mongoose.model('Quiz')
     //     console.log("saved");
     //      });
 
-   Quiz.find({}, {_id:0}, function (err, Quiz) {
+   Quiz.find({}, {_id:0,'questions._id':0,'questions.options._id':0}, function (err, Quiz) {
       console.log("inside quiz")
     if (err) {
       console.log(err)

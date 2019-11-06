@@ -1,21 +1,24 @@
-import { QuizConfig } from './quiz-config';
+//import { QuizConfig } from './quiz-config';
 import { Question } from './question';
 
 export class Quiz {
     id: number;
     name: string;
     description: string;
-    config: QuizConfig;
+    //config: QuizConfig;
     questions: Question[];
 
     constructor(data: any) {
         if (data) {
-            this.id = data.id;
-            this.name = data.name;
-            this.description = data.description;
-            this.config = new QuizConfig(data.config);
+          console.log('inside');
+            this.id = data[0].id;
+          console.log(this.id);
+            this.name = data[0].name;
+            this.description = data[0].description;
+            console.log(this.name);
+            console.log(this.description);
             this.questions = [];
-            data.questions.forEach(q => {
+            data[0].questions.forEach(q => {
                 this.questions.push(new Question(q));
             });
         }
