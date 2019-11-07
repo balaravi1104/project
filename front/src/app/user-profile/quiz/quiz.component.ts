@@ -53,7 +53,7 @@ export class QuizComponent implements OnInit {
       res => {
         this.data = res;
         console.log(this.data);
-        console.log(this.data);
+        console.log(this.data[0]);
         this.quiz = new Quiz(this.data);
         console.log('hi');
         this.pager.count = this.quiz.questions.length;
