@@ -1,3 +1,4 @@
+<app-loader></app-loader>
 <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
   <input type="text" name="email" #email="ngModel" [(ngModel)]="model.email" placeholder="Email" [pattern]="emailRegex"
     required [ngClass]="{'invalid-textbox' :signInForm.submitted && !email.valid }">

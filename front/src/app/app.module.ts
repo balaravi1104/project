@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // components
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
@@ -15,9 +16,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { UserService } from './shared/user.service';
-//other
+import { LoaderService } from './shared/loader.service';
+
+//auth
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderInterceptor } from './shared/loader.interceptor';
 
 
 @NgModule({
@@ -29,19 +34,21 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     SignInComponent,
     QuizComponent,
     ResultComponent,
-    NavComponent
+    NavComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
    AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  },AuthGuard,UserService],
+  }, { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },AuthGuard,UserService,LoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
